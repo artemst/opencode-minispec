@@ -1,0 +1,36 @@
+{
+  "name": "opencode-minispec",
+  "version": "0.1.0",
+  "description": "Document-driven software development workflow commands for OpenCode",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "commands",
+    "README.md",
+    "README.ru.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemst/opencode-minispec.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artemst/opencode-minispec/issues"
+  },
+  "homepage": "https://github.com/artemst/opencode-minispec#readme",
+  "license": "MIT",
+  "keywords": [
+    "opencode",
+    "plugin",
+    "workflow",
+    "spec",
+    "documentation"
+  ],
+  "scripts": {
+    "check": "node --check index.js",
+    "pack:dry-run": "npm pack --dry-run"
+  }
+}
