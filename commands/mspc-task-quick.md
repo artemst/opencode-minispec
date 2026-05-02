@@ -14,14 +14,24 @@ Read the task reference from `$ARGUMENTS`:
 
 If no argument is provided, stop and ask the user what to fix.
 
+When assigning a new task ID, scan all existing task-bearing artifacts before choosing the number:
+- `docs/TODO.md`
+- `docs/DONE.md`
+- active spec filenames and contents in `docs/specs/`
+- exploration summaries in `docs/explorations/`
+
+Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `TODO.md` to `DONE.md`.
+
 ## Process (follow in order)
 
 ### Phase 1 — Read & Understand
 
 1. Read `AGENTS.md` for project context and conventions.
 2. Read `docs/TODO.md` — locate the task, or decide where to add it if new.
-3. Read `docs/REQS.md` and `docs/TECH.md` briefly — understand the current state relevant to the change.
-4. Read the specific code files the change would touch.
+3. Read `docs/DONE.md` for completed task context and task ID allocation.
+4. Scan `docs/specs/` and `docs/explorations/` for existing task IDs if this is an inline task.
+5. Read `docs/REQS.md` and `docs/TECH.md` briefly — understand the current state relevant to the change.
+6. Read the specific code files the change would touch.
 
 ### Phase 2 — Triviality Gate
 
@@ -78,7 +88,7 @@ If the task had a TODO ID, remove it from `docs/TODO.md` and add to `docs/DONE.m
 - **Files**: <files touched>
 ```
 
-If the task was inline (no ID), assign the next available zero-padded task ID, add the DONE entry above, and do not add it to `TODO.md` first.
+If the task was inline (no ID), assign the next zero-padded task ID using the global task ID rule above, add the DONE entry above, and do not add it to `TODO.md` first.
 
 ### Phase 7 — Summary
 

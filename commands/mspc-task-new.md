@@ -16,6 +16,14 @@ If no argument is provided, stop and ask the user which task to work on.
 
 Task IDs are always zero-padded four digits (`T0001`, `T0002`, ...). Matching spec files use the form `docs/specs/SPEC-T0001.md`.
 
+When assigning a new task ID, scan all existing task-bearing artifacts before choosing the number:
+- `docs/TODO.md`
+- `docs/DONE.md`
+- active spec filenames and contents in `docs/specs/`
+- exploration summaries in `docs/explorations/`
+
+Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `TODO.md` to `DONE.md`.
+
 ## Interaction rules
 
 When user input is needed, prefer the `question` tool when it fits; otherwise ask a numbered list with one question per item.
@@ -31,7 +39,7 @@ When user input is needed, prefer the `question` tool when it fits; otherwise as
 5. Read `docs/TECH.md` to understand the current technical state.
 6. Read existing code in `impl/` to understand what exists.
 7. Scan `docs/specs/` for active specs.
-8. If the task references or depends on completed tasks, check `docs/DONE.md` for context.
+8. Read `docs/DONE.md` for completed task context and task ID allocation.
 
 ### Phase 2 — Resolve the Task
 
@@ -41,7 +49,7 @@ If a task ID was given:
 
 If a new description was given:
 - Check whether a matching task already exists in `TODO.md`.
-- If not, assign the next available zero-padded task ID and choose the appropriate `TODO.md` section.
+- If not, assign the next zero-padded task ID using the global task ID rule above, then choose the appropriate `TODO.md` section.
 - Confirm the new task text and section with the user before writing anything.
 - After confirmation, add it to `TODO.md`.
 

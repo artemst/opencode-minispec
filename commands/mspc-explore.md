@@ -16,6 +16,14 @@ The session produces:
 2. Updates to `docs/CONCEPT.md` if the vision changed
 3. New items in `docs/TODO.md` if actionable work emerged
 
+When assigning new task IDs for TODO items, scan all existing task-bearing artifacts first:
+- `docs/TODO.md`
+- `docs/DONE.md`
+- active spec filenames and contents in `docs/specs/`
+- exploration summaries in `docs/explorations/`
+
+Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `TODO.md` to `DONE.md`.
+
 ## Process (follow in order)
 
 ### Phase 1 — Read & Understand
@@ -23,9 +31,10 @@ The session produces:
 1. Read `AGENTS.md` for project context.
 2. Read `docs/CONCEPT.md` for the current vision.
 3. Read `docs/TODO.md` — check the Open Questions section for related items.
-4. Read `docs/REQS.md` and `docs/TECH.md` to understand what is already implemented.
-5. If `$ARGUMENTS` references a specific task ID, read that task's details.
-6. Scan `docs/explorations/` for prior sessions on related topics.
+4. Read `docs/DONE.md` for completed task context and task ID allocation.
+5. Read `docs/REQS.md` and `docs/TECH.md` to understand what is already implemented.
+6. If `$ARGUMENTS` references a specific task ID, read that task's details.
+7. Scan `docs/specs/` and `docs/explorations/` for prior sessions and existing task IDs.
 
 ### Phase 2 — Frame the Exploration
 
@@ -69,7 +78,7 @@ When the exploration reaches a natural conclusion (or the user signals they are 
 
 1. Create an exploration summary at `docs/explorations/<YYYY-MM-DD>-<topic-slug>.md`.
 2. Update `docs/CONCEPT.md` if the vision, planned features, or key decisions changed.
-3. Update `docs/TODO.md` with new tasks, questions, or exploration items that emerged.
+3. Update `docs/TODO.md` with new tasks, questions, or exploration items that emerged. Assign any new task IDs using the global task ID rule above.
 4. Do not update `docs/TECH.md` from exploration alone — `TECH.md` tracks implemented reality.
 
 Use this summary format:

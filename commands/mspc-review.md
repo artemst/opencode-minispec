@@ -93,7 +93,7 @@ After the report, offer to add selected findings to `docs/TODO.md` as new tasks.
 Before writing, for each selected finding:
 - Check whether a matching task already exists in `TODO.md`.
 - Decide the TODO category.
-- Assign the next task ID based on the highest existing zero-padded ID, including `DONE.md`.
+- Assign the next task ID by scanning `docs/TODO.md`, `docs/DONE.md`, active spec filenames and contents in `docs/specs/`, and exploration summaries in `docs/explorations/`; use one greater than the highest real `T####` found.
 
 Write additions to `docs/TODO.md` under the appropriate section:
 

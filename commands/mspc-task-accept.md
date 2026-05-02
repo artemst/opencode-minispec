@@ -70,7 +70,7 @@ Manual tests:
 - Include step-by-step instructions.
 - Note expected outcomes.
 
-### Phase 5 — Archive the Task
+### Phase 5 — Archive the Task Record
 
 1. Remove the task from `docs/TODO.md`.
 2. Add it to `docs/DONE.md` using this format:
@@ -84,7 +84,7 @@ Manual tests:
 - **Files**: <key files created or modified>
 ```
 
-3. Delete `docs/specs/SPEC-T0001.md` for the actual zero-padded task ID after distillation is complete.
+Do not delete the spec yet. Later phases may still need it while updating `CONCEPT.md` or `LESSONS.md`.
 
 ### Phase 6 — Update `CONCEPT.md` if needed
 
@@ -124,7 +124,11 @@ Entry format in `docs/LESSONS.md`:
 - **Implication**: <what future work should do differently, or watch for>
 ```
 
-### Phase 7 — Summary
+### Phase 7 — Remove the Spec
+
+After all distillation, archive, `CONCEPT.md`, and `LESSONS.md` updates are complete, delete `docs/specs/SPEC-T0001.md` for the actual zero-padded task ID.
+
+### Phase 8 — Summary
 
 Present:
 - What was distilled and where:
