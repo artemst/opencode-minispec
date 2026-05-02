@@ -37,7 +37,10 @@ If no argument is provided, perform a general sync.
 1. Check whether `minispec/` exists.
 2. If it does not exist, stop and tell the user to run `/mspc-init` first. Do not create minispec from sync.
 3. Check for required docs: `CONCEPT.md`, `REQS.md`, `TECH.md`, `TESTS.md`, `TODO.md`, `DONE.md`, and `LESSONS.md`.
-4. If some required docs are missing, create only the missing shells using the current minispec formats. Preserve existing files.
+4. If more than one required doc is missing, stop and tell the user to run `/mspc-init` to repair the structure.
+5. If exactly one required doc is missing, create a compact shell for that file, preserve existing files, and continue.
+
+Compact missing-doc shell: frontmatter with `title` and `created` (`status: draft` for `CONCEPT.md`/`REQS.md`), an H1 matching the doc purpose, and one placeholder sentence saying it was recreated by `/mspc-sync` and must be populated from appropriate verified sources. For `TODO.md`, include `## Backlog` with `### Development`, `### Open Questions`, and `### Exploration`.
 
 ### Phase 2 - Read Current State
 
@@ -141,13 +144,7 @@ Add only actionable sync findings:
 - stale TODO items that need user confirmation before removal
 - follow-up work needed to make docs and code consistent
 
-When assigning new task IDs, scan all existing task-bearing artifacts first:
-- `minispec/TODO.md`
-- `minispec/DONE.md`
-- active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/summaries/`
-
-Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved to `DONE.md`.
+New task IDs: scan `minispec/TODO.md`, `DONE.md`, active specs, and summaries/sync reports for real `T####`; use max+1, starting at `T0001`; never reuse moved IDs.
 
 Do not flood TODO with every minor observation. Prefer concise, actionable entries.
 
@@ -211,11 +208,9 @@ Present:
   - `/mspc-explore <topic>` if an unresolved question needs discussion.
   - `/mspc-review` if sync revealed broader risk, code quality, or testing concerns.
 
-## Rules to always apply
+## Rules
 
 - Accuracy over completeness. It is better to leave an open question than invent certainty.
 - Reality docs stay reality-only.
-- Preserve user-owned docs and existing wording where it remains accurate.
 - Prefer updating existing sections over appending parallel sections.
-- Keep the sync report concise but traceable.
 - Do not implement code changes during sync.

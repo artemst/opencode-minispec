@@ -39,7 +39,7 @@ OpenCode custom commands use a flat namespace, so minispec prefixes every comman
                     repeat
 
 /mspc-task-quick       One-shot trivial change (no spec)
-/mspc-review           Codebase and docs quality review; can add selected findings to TODO
+/mspc-review           Read-only quality review; recommends add/fix/ignore follow-up
 ```
 
 ### Phases
@@ -48,9 +48,9 @@ OpenCode custom commands use a flat namespace, so minispec prefixes every comman
 2. **Sync** - after `/mspc-init`, run `/mspc-sync` for existing repositories so minispec can derive docs from current code, tests, configs, README/docs, and existing minispec files. For a newly created project with no existing implementation, this step is unnecessary. Later, `/mspc-sync` is optional and repeatable whenever docs may have drifted.
 3. **Explore** - run `/mspc-explore` when an idea, open question, tradeoff, or direction needs discussion before it becomes implementation work. It saves the outcome in `minispec/summaries/` and updates project docs when decisions change them.
 4. **Implement** - pick a `T####` item from `minispec/TODO.md`, then run `/mspc-task-new T0001`, `/mspc-task-impl T0001`, and `/mspc-task-accept T0001`. The spec is temporary: it is created in `minispec/specs/`, used for implementation, distilled into living docs, archived in `DONE.md`, and deleted.
-5. **Review** - run `/mspc-review` periodically to find bugs, risks, missing tests, stale assumptions, and actionable quality issues. If the main problem is documentation drift, run `/mspc-sync` instead.
+5. **Review** - run `/mspc-review` periodically to find bugs, risks, missing tests, stale assumptions, and actionable quality issues. It is read-only; switch to build mode to add selected findings to TODO or fix them. If the main problem is documentation drift, run `/mspc-sync` instead.
 
-`minispec/TODO.md` is the working backlog. It can be seeded by `/mspc-init`, reconciled by `/mspc-sync`, expanded by `/mspc-explore`, populated from selected `/mspc-review` findings, or appended by `/mspc-task-new <description>`. You can also edit it directly when that is simpler.
+`minispec/TODO.md` is the working backlog. It can be seeded by `/mspc-init`, reconciled by `/mspc-sync`, expanded by `/mspc-explore`, populated from selected review findings after `/mspc-review`, or appended by `/mspc-task-new <description>`. You can also edit it directly when that is simpler.
 
 ### Command Responsibilities
 
@@ -63,7 +63,7 @@ OpenCode custom commands use a flat namespace, so minispec prefixes every comman
 | `/mspc-task-impl` | Task spec, living docs, relevant code/tests | Code, tests, implementation updates | Satisfy the task spec |
 | `/mspc-task-accept` | Completed spec, implementation, verification results | `REQS.md`, `TECH.md`, `TESTS.md`, `DONE.md`, `TODO.md`, maybe `CONCEPT.md`/`LESSONS.md`; deletes spec | Distill completed work into durable project knowledge |
 | `/mspc-task-quick` | Current docs/code around a trivial change | Code/docs plus living-doc updates if needed; `DONE.md` | Complete a tiny safe change without a spec |
-| `/mspc-review` | Code, tests, docs, active specs | Usually nothing; selected findings may become TODO tasks | Find bugs, risks, missing tests, and actionable issues |
+| `/mspc-review` | Code, tests, docs, active specs | Nothing; read-only triage recommendations | Find bugs, risks, missing tests, and actionable issues |
 
 ## Commands
 
@@ -91,7 +91,7 @@ Synchronizes minispec docs with current project reality.
 /mspc-sync docs-only
 ```
 
-Run it immediately after `/mspc-init` when adopting minispec into an existing repo. For brand-new projects it is obsolete until there is code or external documentation to reconcile. After adoption, use it optionally after large manual changes, before planning new work, or whenever docs may have drifted.
+Run it immediately after `/mspc-init` when adopting minispec into an existing repo. For brand-new projects it is unnecessary until there is code or external documentation to reconcile. After adoption, use it optionally after large manual changes, before planning new work, or whenever docs may have drifted.
 
 Source-of-truth rules:
 - Code, tests, configs, and build metadata define implemented technical reality.
@@ -171,7 +171,7 @@ Reviews the project for bugs, behavior risks, security issues, quality problems,
 /mspc-review
 ```
 
-The command reads docs, code, tests, configs, and active specs, then reports findings by severity with flat `F<N>` identifiers. It is read-only except that selected findings can be promoted into `minispec/TODO.md` as new tasks. If documentation drift is the main issue, use `/mspc-sync`.
+The command reads docs, code, tests, configs, and active specs, then reports findings by severity with flat `F<N>` identifiers. It is read-only and recommends what to add to TODO, fix now, or ignore/defer. Switch to build mode to act on selected findings. If documentation drift is the main issue, use `/mspc-sync`.
 
 ## Project Files
 

@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Rename the generated minispec document workspace from `docs/` to `minispec/` to avoid conflicts with user-owned documentation directories.
 - Rename generated durable session storage from `minispec/explorations/` to `minispec/summaries/` so exploration summaries and sync reports share a neutral home.
 - Remove the fixed generated `impl/` codebase directory requirement. minispec now owns `minispec/` docs and a managed minispec section in root `AGENTS.md`; project code, tests, and other docs can use any layout.
+- Polish workflow prompts.
 - Restructure README to follow logical hierarchy from core information to detailed sections.
 
 ## 0.1.0

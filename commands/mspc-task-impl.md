@@ -17,7 +17,7 @@ Read the task ID from `$ARGUMENTS`. If no argument is provided, stop and ask the
 2. Read `AGENTS.md` for project conventions and principles.
 3. Read `minispec/TECH.md` for current technical architecture — component boundaries, data model, technology choices, and established patterns.
 4. Read `minispec/REQS.md` to understand what is already implemented and working.
-5. If this task has dependencies, read the current codebase to understand what already exists.
+5. Read relevant source files, tests, configs, and existing patterns before planning, even if the task has no explicit dependencies.
 6. Build a mental model of what needs to be built or modified, the acceptance criteria to satisfy, the edge cases to handle, and what is explicitly out of scope.
 
 ### Phase 2 — Plan
@@ -85,11 +85,10 @@ Present:
   - If all criteria are ✅ or 🟡: "Test the 🟡 items yourself, then run `/mspc-task-accept T0001` with the actual zero-padded task ID to finalize."
   - If any criterion is ❌: "Fix the blockers above before accepting. Do not run `/mspc-task-accept` until all criteria pass."
 
-## Rules to always apply
+## Rules
 
 - The spec is the source of truth. If the spec seems wrong, flag it rather than silently diverging.
 - Stay in scope. The spec's Excludes section exists for a reason.
 - Test what you build. Every acceptance criterion should have corresponding verification.
 - Do not mark tasks as done. The user does that via `/mspc-task-accept` after their own verification.
-- Ask before improvising. A short clarification is cheaper than a wrong implementation.
 - Clean code, not perfect code. Write clear, working code that satisfies the criteria without over-engineering.

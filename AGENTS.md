@@ -4,9 +4,9 @@
 
 - This `AGENTS.md` is maintainer guidance for this plugin repo. It is not the project-level `AGENTS.md` that minispec generates inside user workspaces.
 - This repo ships one OpenCode plugin, `opencode-minispec`. The real product is `commands/*.md`; `index.js` is only the loader.
-- Keep prompt changes aligned across `commands/*.md`, `README.md`, `README.ru.md`, and `PUBLISH.md`. The docs repeat the workflow and command names, so drift is easy to introduce.
+- Keep prompt changes aligned across `commands/*.md`, `README.md`, and `PUBLISH.md`. The docs repeat the workflow and command names, so drift is easy to introduce.
 - Shipped commands are intentionally flat `mspc-*` names: `mspc-init`, `mspc-sync`, `mspc-explore`, `mspc-task-new`, `mspc-task-impl`, `mspc-task-accept`, `mspc-task-quick`, `mspc-review`. Do not introduce dotted or colon-style namespaces.
-- `package.json` is public surface too: it publishes `index.js`, `commands/`, `README.md`, and `README.ru.md`.
+- `package.json` is public surface too: it publishes `index.js`, `commands/`, and `README.md`.
 
 ## Loader Constraints
 
@@ -22,7 +22,7 @@
 - `minispec/specs/SPEC-T####.md` is temporary: create it in `/mspc-task-new`, implement from it in `/mspc-task-impl`, distill it and delete it in `/mspc-task-accept`.
 - `minispec/LESSONS.md` stays sparse. Only durable, non-obvious lessons belong there, and `/mspc-task-accept` or `/mspc-task-quick` should confirm with the user before writing one.
 - `/mspc-task-quick` is a hard trivial-change path. If the work needs design decisions, touches more than a tiny surface, or grows during verification, stop and route to `/mspc-task-new`.
-- `/mspc-review` is read-only except for findings the user explicitly chooses to promote into `minispec/TODO.md`.
+- `/mspc-review` is read-only; selected findings can be promoted later by an explicit build-mode request.
 
 ## Verification
 

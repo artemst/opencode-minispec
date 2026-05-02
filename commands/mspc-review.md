@@ -9,7 +9,7 @@ You are conducting a risk-focused project review. The goal is to surface bugs, b
 
 This is not the main documentation synchronization command. If the main issue is that minispec docs are stale or incomplete, report that and suggest `/mspc-sync`. Do not rewrite docs during review.
 
-This is read-only except for one explicit exception: Phase 4 may write new task entries to `minispec/TODO.md`, but only for findings the user explicitly selects.
+This command is read-only. Do not edit code or docs. If the user wants findings written to `minispec/TODO.md` or fixed, tell them to switch to build mode and give explicit instructions.
 
 ## Process (follow in order)
 
@@ -94,44 +94,27 @@ For each finding:
 
 If no findings are discovered, state that explicitly and list any residual risks from incomplete source coverage.
 
-### Phase 4 - Triage to `minispec/TODO.md`
+### Phase 4 - Read-only Triage
 
-After the report, offer to add selected findings to `minispec/TODO.md` as new tasks. Prompt the user:
+After the report, recommend what to do with findings:
+- **TODO candidates** - findings that should become planned work in `minispec/TODO.md`.
+- **Fix-now candidates** - small, high-confidence fixes the user may ask build mode to make immediately.
+- **Ignore/defer** - low-risk, duplicate, or non-actionable findings.
 
-> Which findings should become TODO items? Reply with a list of Fs (for example `F1, F3, F7`), or `all high`, or `none`.
-
-Before writing, for each selected finding:
-- Check whether a matching task already exists in `minispec/TODO.md`.
-- Decide the TODO category.
-- Assign the next task ID by scanning `minispec/TODO.md`, `minispec/DONE.md`, active spec filenames and contents in `minispec/specs/`, and exploration summaries plus sync reports in `minispec/summaries/`; use one greater than the highest real `T####` found.
-
-Write additions to `minispec/TODO.md` under the appropriate section:
-
-```markdown
-- [ ] **T0001** - <finding description, rewritten as a task> [S/M/L]
-  _From /mspc-review F<N>: <short context>_
-```
-
-After writing, report:
-- Which findings became which task IDs
-- Which were skipped as duplicates
-- Whether any selected findings could not be converted and why
+Do not write TODO entries or fix code in this command. Tell the user they can switch to build mode and say, for example, "add F1 and F3 to TODO", "fix F2 now", or "ignore F4".
 
 ### Phase 5 - Summary
 
 Present:
 - Total findings by category and priority
 - Top 3 most important things to address
-- TODO items added in Phase 4, or explicitly say none were added
+- Read-only triage recommendation: add to TODO, fix now, or ignore/defer
 - Whether `/mspc-sync` is recommended for doc reconciliation
 - Overall project health assessment in one paragraph
-- Suggested next steps - which of the new TODO items to tackle first
+- Suggested next steps for build mode if the user wants changes
 
-## Rules to always apply
+## Rules
 
-- Findings first. Keep overview secondary.
-- Be evidence-based and cite locations.
-- Do not fix things.
-- Do not synchronize docs; suggest `/mspc-sync` when doc reconciliation is the main need.
-- Prioritize actionable risks and gaps.
-- Respect the project's conventions.
+- Findings first, evidence-based, with locations.
+- Read-only: no fixes, TODO writes, or doc synchronization.
+- Suggest `/mspc-sync` when doc reconciliation is the main need.

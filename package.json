@@ -10,8 +10,7 @@
   "files": [
     "index.js",
     "commands",
-    "README.md",
-    "README.ru.md"
+    "README.md"
   ],
   "repository": {
     "type": "git",

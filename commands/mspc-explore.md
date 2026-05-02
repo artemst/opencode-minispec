@@ -16,13 +16,7 @@ The session produces:
 2. Updates to `minispec/CONCEPT.md` if the vision changed
 3. New items in `minispec/TODO.md` if actionable work emerged
 
-When assigning new task IDs for TODO items, scan all existing task-bearing artifacts first:
-- `minispec/TODO.md`
-- `minispec/DONE.md`
-- active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/summaries/`
-
-Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
+New task IDs: scan `minispec/TODO.md`, `DONE.md`, active specs, and summaries/sync reports for real `T####`; use max+1, starting at `T0001`; never reuse moved IDs.
 
 ## Process (follow in order)
 
@@ -78,8 +72,9 @@ When the exploration reaches a natural conclusion (or the user signals they are 
 
 1. Create an exploration summary at `minispec/summaries/<YYYY-MM-DD>-<topic-slug>.md`.
 2. Update `minispec/CONCEPT.md` if the vision, planned features, or key decisions changed.
-3. Update `minispec/TODO.md` with new tasks, questions, or exploration items that emerged. Assign any new task IDs using the global task ID rule above.
-4. Do not update `minispec/TECH.md` from exploration alone — `minispec/TECH.md` tracks implemented reality.
+3. Update `minispec/TODO.md` with new tasks, questions, or exploration items that emerged. Assign any new task IDs using the task ID rule above.
+4. If `$ARGUMENTS` is a TODO open-question/exploration ID, update that item: remove it if answered and captured in the summary, rewrite it if still open, or replace it with concrete tasks. Do not leave it stale.
+5. Do not update `minispec/TECH.md` from exploration alone — `minispec/TECH.md` tracks implemented reality.
 
 Use this summary format:
 

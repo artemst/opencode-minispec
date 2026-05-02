@@ -14,15 +14,7 @@ Read the task reference from `$ARGUMENTS`. This can be:
 
 If no argument is provided, stop and ask the user which task to work on.
 
-Task IDs are always zero-padded four digits (`T0001`, `T0002`, ...). Matching spec files use the form `minispec/specs/SPEC-T0001.md`.
-
-When assigning a new task ID, scan all existing task-bearing artifacts before choosing the number:
-- `minispec/TODO.md`
-- `minispec/DONE.md`
-- active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/summaries/`
-
-Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
+Task IDs are zero-padded (`T0001`, `T0002`, ...); matching specs use `minispec/specs/SPEC-T0001.md`. New task IDs: scan `TODO.md`, `DONE.md`, active specs, and summaries/sync reports for real `T####`; use max+1, starting at `T0001`; never reuse moved IDs.
 
 ## Interaction rules
 
@@ -49,7 +41,7 @@ If a task ID was given:
 
 If a new description was given:
 - Check whether a matching task already exists in `minispec/TODO.md`.
-- If not, assign the next zero-padded task ID using the global task ID rule above, then choose the appropriate `minispec/TODO.md` section.
+- If not, assign the next zero-padded task ID using the task ID rule above, then choose the appropriate `minispec/TODO.md` section.
 - Confirm the new task text and section with the user before writing anything.
 - After confirmation, add it to `minispec/TODO.md`.
 
@@ -60,10 +52,7 @@ Determine the task type from its `minispec/TODO.md` category and description.
 **Development task**
 Proceed to Phase 4. Before writing a spec, check whether the work fits `/mspc-task-quick`'s triviality gate. If it does, stop and redirect there.
 
-**Open question**
-Tell the user this task needs exploration, not a spec. Suggest running `/mspc-explore T0001` with the actual zero-padded task ID.
-
-**Exploration**
+**Open question or exploration**
 Tell the user this task needs exploration, not a spec. Suggest running `/mspc-explore T0001` with the actual zero-padded task ID.
 
 ### Phase 4 — Write Spec

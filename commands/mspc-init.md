@@ -7,7 +7,7 @@ agent: build
 
 You are adding the minispec workflow to the current workspace. The workspace may be a brand-new project, an existing project with code and docs, or a project that already has partial minispec files.
 
-The goal is safe bootstrap, not deep repository analysis. Create missing structure, seed only what is known, and preserve existing project files. For existing projects, recommend `/mspc-sync` after init to derive or refresh docs from the current codebase and existing docs.
+The goal is safe bootstrap, not deep repository analysis. Create missing structure, seed only what is known, and preserve existing project files. Recommend `/mspc-sync` after init only for existing/adopted projects or later doc drift.
 
 ## Interaction rules
 
@@ -18,7 +18,7 @@ Read `$ARGUMENTS` as optional project intent. The argument can be:
 - An inline idea description written directly in the prompt.
 - Empty - allowed for existing projects; inspect the workspace enough to bootstrap safely.
 
-To distinguish a file path: if `$ARGUMENTS` looks like a path (ends in `.md`, contains `/`, or matches an existing file), treat it as a file path and read it. If the file does not exist, stop and tell the user. Otherwise, treat `$ARGUMENTS` as the idea description itself.
+To distinguish a file path: if `$ARGUMENTS` matches an existing file, read it. If it is a single path-like token (ends in `.md` or contains `/`), treat it as a path and stop if missing. Otherwise, treat `$ARGUMENTS` as the idea description.
 
 Do not run a full codebase audit or attempt to reconstruct requirements from code. That belongs to `/mspc-sync`.
 
@@ -41,6 +41,8 @@ If the workspace is greenfield and no idea was provided, stop before writing and
 1. An inline idea description
 2. A path to a markdown file containing the idea
 3. Confirmation that this is an existing project and they only want the minispec structure installed
+
+If the idea has contradictions or missing essentials that would make contentful docs unreliable, ask the Step 7 clarification questions before writing those sections. It is okay to create directories and placeholder shells first.
 
 ---
 
@@ -188,8 +190,7 @@ status: draft
 
 # System Requirements
 
-_This document tracks implemented system behavior. See CONCEPT.md for planned features._
-_Updated via `/mspc-task-accept` as tasks are completed and via `/mspc-sync` when docs are reconciled with existing code._
+_Implemented behavior only. Planned features belong in CONCEPT.md. Updated by `/mspc-task-accept` and `/mspc-sync`._
 
 ## Functional Requirements
 
@@ -216,8 +217,7 @@ created: "<YYYY-MM-DD>"
 
 # Technical Details
 
-_This document tracks the actual technical architecture and implementation details._
-_See CONCEPT.md for the overall vision. Updated via `/mspc-task-accept` as tasks are completed and via `/mspc-sync` when docs are reconciled with existing code._
+_Actual technical architecture and implementation details. See CONCEPT.md for vision. Updated by `/mspc-task-accept` and `/mspc-sync`._
 
 ## Overview
 
@@ -225,23 +225,13 @@ _No implemented technical details captured yet._
 
 ## Technology Stack
 
-_Populated as technology choices become part of the implementation or are synced from existing code._
-
 ## Project Structure
-
-_Populated as the implemented codebase takes shape or is synced from existing code._
 
 ## Components
 
-_Populated as components are implemented or synced from existing code._
-
 ## Data Model
 
-_Populated as data structures are implemented or synced from existing code._
-
 ## Key Technical Decisions
-
-_Populated as technical decisions are implemented or synced from existing code._
 ```
 
 **`minispec/TESTS.md`**
@@ -254,16 +244,11 @@ created: "<YYYY-MM-DD>"
 
 # Regression Test Cases
 
-_This document tracks test cases for regression testing._
-_Updated via `/mspc-task-accept` as tasks are completed and via `/mspc-sync` when test coverage is reconciled with existing tests._
+_Automated and manual regression checks. Updated by `/mspc-task-accept` and `/mspc-sync`._
 
 ## Automated Tests
 
-_Test cases that are covered by automated tests._
-
 ## Manual Tests
-
-_Test cases that require manual verification._
 ```
 
 **`minispec/DONE.md`**
@@ -276,8 +261,7 @@ created: "<YYYY-MM-DD>"
 
 # Completed Tasks
 
-_Tasks moved here from TODO.md after acceptance via `/mspc-task-accept` or completion via `/mspc-task-quick`._
-_Do not reconstruct historical tasks during adoption; use this file for minispec-tracked work going forward._
+_Minispec-tracked work completed via `/mspc-task-accept` or `/mspc-task-quick`. Do not reconstruct historical tasks during adoption._
 ```
 
 **`minispec/LESSONS.md`**
@@ -290,19 +274,11 @@ created: "<YYYY-MM-DD>"
 
 # Lessons
 
-_Non-obvious knowledge captured during task work: abandoned approaches, reversed decisions, gotchas, and surprises._
-_Not a log of what shipped (see DONE.md) or what exists (see REQS.md / TECH.md) - only durable insights a future reader could not infer from the code or docs._
-
-## How to use
-
-- **Add** a lesson when a task revealed something that will save future work. Capture it via `/mspc-task-accept` or `/mspc-task-quick` when the user confirms a lesson emerged.
-- **Skip** if the task had no surprises. Most tasks will not produce lessons. An empty acceptance is fine.
-- **Update** an existing lesson if later work refined or contradicted it - do not just append a correction.
-- **Remove** obsolete lessons when the underlying reality changes.
+_Durable, non-obvious insights only: abandoned approaches, reversals, gotchas, surprises. Not a ship log._
 
 ## Lessons
 
-_Populated as tasks are accepted. Each entry references the task ID where the lesson was learned._
+_Populated by `/mspc-task-accept` or `/mspc-task-quick` after user confirmation._
 ```
 
 ---
@@ -321,7 +297,7 @@ If root `AGENTS.md` exists:
 
 Use this template for a new file, or use only the managed section when merging into an existing file:
 
-```markdown
+````markdown
 # AGENTS.md
 
 This file provides guidance to OpenCode when working with code in this repository.
@@ -347,66 +323,40 @@ This file provides guidance to OpenCode when working with code in this repositor
 - When user input is needed, prefer the `question` tool when it fits; otherwise ask a numbered list with one question per item.
 - In deeper discussions, ask one batch at a time, usually no more than 3-5 questions before waiting for answers.
 - In open-ended discussions, do one quick reframe before diving deep: clarify the actual goal, and check whether the framing or proposed solution should be challenged.
-- Surface assumptions, constraints, and tradeoffs explicitly instead of silently choosing a path.
 - At natural pauses, summarize what is understood, what remains open, and what recommendation follows.
 - Normal discussion is conversational by default. Do not create docs or backlog items from ordinary chat unless the user asks, or the interaction is explicitly promoted to `/mspc-explore`.
 - If a conversation produces durable decisions, clarified vision, or actionable backlog items, suggest `/mspc-explore` so the outcome is captured in `minispec/summaries/` and linked back into project docs.
 
-### Context files
+### Files
 
-Read these before working on any minispec task:
-
-- `minispec/CONCEPT.md` - project vision, motivation, planned features
-- `minispec/REQS.md` - system requirements tracking what is implemented
-- `minispec/TECH.md` - technical details tracking what is built
-- `minispec/TODO.md` - backlog: development tasks, open questions, exploration items
-- `minispec/DONE.md` - completed tasks archive
-- `minispec/TESTS.md` - regression test cases
-- `minispec/LESSONS.md` - non-obvious insights, reversed decisions, gotchas
-- `minispec/specs/` - active per-task implementation specs
-- `minispec/summaries/` - exploration and sync summaries
-
-### Document philosophy
-
-- **CONCEPT.md** = vision and north star. Can describe things not yet built. Updated when the vision changes or when `/mspc-sync` finds documented intent.
-- **REQS.md** = tracks reality. Only contains requirements for features that are implemented. Updated via `/mspc-task-accept` and `/mspc-sync`.
-- **TECH.md** = tracks reality. Only contains technical details for what is built. Updated via `/mspc-task-accept` and `/mspc-sync`.
-- **TESTS.md** = test registry. Tracks automated and manual checks for implemented behavior. Updated via `/mspc-task-accept` and `/mspc-sync`.
-- **TODO.md** = the backlog. Tasks, questions, explorations. Updated as work is planned, reviewed, synced, and accepted.
-- **LESSONS.md** = durable insight only. Abandoned approaches, reversed decisions, gotchas. Not a diary.
-- **Specs** = temporary bridge documents. Created by `/mspc-task-new`, consumed by `/mspc-task-impl`, removed by `/mspc-task-accept`.
+- `minispec/CONCEPT.md` - vision and planned direction; may describe future work.
+- `minispec/REQS.md`, `minispec/TECH.md`, `minispec/TESTS.md` - implemented, verified reality only.
+- `minispec/TODO.md`, `minispec/DONE.md` - backlog and completed task archive.
+- `minispec/LESSONS.md` - durable non-obvious insights, not a diary.
+- `minispec/specs/` - temporary task specs; deleted by `/mspc-task-accept`.
+- `minispec/summaries/` - exploration and sync summaries.
 
 ### Workflow
 
 ```text
-/mspc-init  ->  /mspc-sync  ->  /mspc-explore (repeat as needed)
-                         |              |
-                         v              v
-                 /mspc-task-new -> /mspc-task-impl -> /mspc-task-accept -> (repeat)
+/mspc-init
+  -> /mspc-sync      existing/adopted/drifted projects only
+  -> /mspc-explore   decisions and open questions
+  -> /mspc-task-new -> /mspc-task-impl -> /mspc-task-accept -> repeat
 
 Trivial changes: /mspc-task-quick (the only no-spec path, still updates living docs when needed)
 Doc sync:        /mspc-sync (repeatable reconciliation of docs with current code/docs)
-Health review:   /mspc-review (finds bugs, risks, missing tests, and actionable issues)
+Health review:   /mspc-review (read-only findings for bugs, risks, missing tests, and quality issues)
 ```
 
-| Command | Purpose |
-|---------|---------|
-| `/mspc-init` | Safely add minispec structure and workflow guidance |
-| `/mspc-sync` | Reconcile minispec docs with current code, tests, configs, and docs |
-| `/mspc-explore` | Explore project questions, save to summaries, update docs if needed |
-| `/mspc-task-new T0001` | Create a spec for a development task, or route open questions/exploration to `/mspc-explore` |
-| `/mspc-task-impl T0001` | Implement from spec, verify acceptance criteria |
-| `/mspc-task-accept T0001` | Distill spec into REQS/TECH/TESTS, archive task, delete spec |
-| `/mspc-task-quick [desc]` | Lightweight flow for trivial changes - no spec file |
-| `/mspc-review` | Audit code, tests, docs, and specs for risks and actionable findings |
 <!-- minispec:end -->
-```
+````
 
 ---
 
 ## Step 7 - Light clarification round
 
-Only ask questions needed to make the initial files internally consistent. Do not conduct a full product or architecture deep-dive.
+Only ask questions needed to make the initial files internally consistent. Run this before writing contentful sections if ambiguity would otherwise cause guessing. Do not conduct a full product or architecture deep-dive.
 
 For greenfield projects with an idea, ask about:
 - Contradictions within the idea description
@@ -418,7 +368,7 @@ For existing projects, ask only if needed to avoid unsafe writes or resolve an `
 
 Ask all clarification questions in one message. If there are no genuine ambiguities, skip this step.
 
-After the user answers, immediately update affected docs on disk.
+After the user answers, write or update affected docs on disk.
 
 ---
 

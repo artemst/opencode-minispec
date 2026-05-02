@@ -14,13 +14,7 @@ Read the task reference from `$ARGUMENTS`:
 
 If no argument is provided, stop and ask the user what to fix.
 
-When assigning a new task ID, scan all existing task-bearing artifacts before choosing the number:
-- `minispec/TODO.md`
-- `minispec/DONE.md`
-- active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/summaries/`
-
-Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
+New task IDs: scan `minispec/TODO.md`, `DONE.md`, active specs, and summaries/sync reports for real `T####`; use max+1, starting at `T0001`; never reuse moved IDs.
 
 ## Process (follow in order)
 
@@ -63,7 +57,7 @@ Ask the user to confirm before editing. One round of confirmation only.
 2. Run relevant tests and any project linter, formatter, or build check.
 3. Confirm the outcome matches what was agreed in Phase 3.
 
-If verification fails or the change turns out to be larger than it looked, stop and suggest promoting the work to `/mspc-task-new`. Do not patch over a problem that grew beyond the triviality gate.
+If verification fails or the change turns out to be larger than it looked, stop, report exact changed files, and ask whether to keep this command's edits, revert only those edits, or promote the work to `/mspc-task-new`. Do not patch over a problem that grew beyond the triviality gate.
 
 ### Phase 5 — Update Living Docs (minimal)
 
@@ -88,7 +82,7 @@ If the task had a TODO ID, remove it from `minispec/TODO.md` and add to `minispe
 - **Files**: <files touched>
 ```
 
-If the task was inline (no ID), assign the next zero-padded task ID using the global task ID rule above, add the DONE entry above, and do not add it to `minispec/TODO.md` first.
+If the task was inline (no ID), assign the next zero-padded task ID using the task ID rule above, add the DONE entry above, and do not add it to `minispec/TODO.md` first.
 
 ### Phase 7 — Summary
 
@@ -99,10 +93,8 @@ Present:
 - `minispec/DONE.md` entry added
 - Any note if a lesson was captured
 
-## Rules to always apply
+## Rules
 
-- The triviality gate is not negotiable.
-- One confirmation, not many.
-- Minimum doc updates.
+- Enforce the triviality gate.
+- One confirmation, minimum doc updates, no scope creep.
 - Never skip verification.
-- No scope creep.
