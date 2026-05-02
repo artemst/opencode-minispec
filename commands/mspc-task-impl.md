@@ -13,10 +13,10 @@ Read the task ID from `$ARGUMENTS`. If no argument is provided, stop and ask the
 
 ### Phase 1 — Read & Understand
 
-1. Read the spec file at `docs/specs/SPEC-T0001.md`, using the actual zero-padded task ID. If it does not exist, tell the user and suggest running `/mspc-task-new T0001` first.
+1. Read the spec file at `minispec/specs/SPEC-T0001.md`, using the actual zero-padded task ID. If it does not exist, tell the user and suggest running `/mspc-task-new T0001` first.
 2. Read `AGENTS.md` for project conventions and principles.
-3. Read `docs/TECH.md` for current technical architecture — component boundaries, data model, technology choices, and established patterns.
-4. Read `docs/REQS.md` to understand what is already implemented and working.
+3. Read `minispec/TECH.md` for current technical architecture — component boundaries, data model, technology choices, and established patterns.
+4. Read `minispec/REQS.md` to understand what is already implemented and working.
 5. If this task has dependencies, read the current codebase to understand what already exists.
 6. Build a mental model of what needs to be built or modified, the acceptance criteria to satisfy, the edge cases to handle, and what is explicitly out of scope.
 
@@ -41,7 +41,7 @@ Rules:
 - Follow the project's coding conventions, naming patterns, and architectural boundaries.
 - Write tests as you go.
 - If you discover something that the spec did not account for, stop and discuss with the user rather than improvising.
-- If the user approves a deviation from the spec, update `docs/specs/SPEC-T0001.md` for the actual zero-padded task ID before continuing to implement.
+- If the user approves a deviation from the spec, update `minispec/specs/SPEC-T0001.md` for the actual zero-padded task ID before continuing to implement.
 - Keep it simple. If you write 200 lines and it could be 50, rewrite it.
 - Match existing code style. Do not introduce new patterns unless the spec calls for it.
 

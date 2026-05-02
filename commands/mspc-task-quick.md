@@ -8,29 +8,29 @@ agent: build
 This is the only intentional no-spec path. Use it for changes that are too small to justify the full `/mspc-task-new -> /mspc-task-impl -> /mspc-task-accept` cycle. Think: a typo fix, a one-line bugfix, a single-copy change, or a small isolated rename. The goal is to keep the documentation trail intact without the ceremony of a spec file.
 
 Read the task reference from `$ARGUMENTS`:
-- A task ID from `TODO.md`
+- A task ID from `minispec/TODO.md`
 - A task ID with description
 - An inline description of a tiny change
 
 If no argument is provided, stop and ask the user what to fix.
 
 When assigning a new task ID, scan all existing task-bearing artifacts before choosing the number:
-- `docs/TODO.md`
-- `docs/DONE.md`
-- active spec filenames and contents in `docs/specs/`
-- exploration summaries in `docs/explorations/`
+- `minispec/TODO.md`
+- `minispec/DONE.md`
+- active spec filenames and contents in `minispec/specs/`
+- exploration summaries in `minispec/explorations/`
 
-Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `TODO.md` to `DONE.md`.
+Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
 
 ## Process (follow in order)
 
 ### Phase 1 — Read & Understand
 
 1. Read `AGENTS.md` for project context and conventions.
-2. Read `docs/TODO.md` — locate the task, or decide where to add it if new.
-3. Read `docs/DONE.md` for completed task context and task ID allocation.
-4. Scan `docs/specs/` and `docs/explorations/` for existing task IDs if this is an inline task.
-5. Read `docs/REQS.md` and `docs/TECH.md` briefly — understand the current state relevant to the change.
+2. Read `minispec/TODO.md` — locate the task, or decide where to add it if new.
+3. Read `minispec/DONE.md` for completed task context and task ID allocation.
+4. Scan `minispec/specs/` and `minispec/explorations/` for existing task IDs if this is an inline task.
+5. Read `minispec/REQS.md` and `minispec/TECH.md` briefly — understand the current state relevant to the change.
 6. Read the specific code files the change would touch.
 
 ### Phase 2 — Triviality Gate
@@ -68,16 +68,16 @@ If verification fails or the change turns out to be larger than it looked, stop 
 ### Phase 5 — Update Living Docs (minimal)
 
 Only update what actually changed:
-- `REQS.md` — only if user-visible behavior changed
-- `TECH.md` — only if technical surface changed
-- `TESTS.md` — only if a new automated or manual test was added
-- `LESSONS.md` — only if the work surfaced a non-obvious insight; confirm with the user before adding
+- `minispec/REQS.md` — only if user-visible behavior changed
+- `minispec/TECH.md` — only if technical surface changed
+- `minispec/TESTS.md` — only if a new automated or manual test was added
+- `minispec/LESSONS.md` — only if the work surfaced a non-obvious insight; confirm with the user before adding
 
-The default for a trivial change is no doc updates beyond `DONE.md`.
+The default for a trivial change is no doc updates beyond `minispec/DONE.md`.
 
 ### Phase 6 — Archive
 
-If the task had a TODO ID, remove it from `docs/TODO.md` and add to `docs/DONE.md`:
+If the task had a TODO ID, remove it from `minispec/TODO.md` and add to `minispec/DONE.md`:
 
 ```markdown
 ## T0001 — <description>
@@ -88,7 +88,7 @@ If the task had a TODO ID, remove it from `docs/TODO.md` and add to `docs/DONE.m
 - **Files**: <files touched>
 ```
 
-If the task was inline (no ID), assign the next zero-padded task ID using the global task ID rule above, add the DONE entry above, and do not add it to `TODO.md` first.
+If the task was inline (no ID), assign the next zero-padded task ID using the global task ID rule above, add the DONE entry above, and do not add it to `minispec/TODO.md` first.
 
 ### Phase 7 — Summary
 
@@ -96,7 +96,7 @@ Present:
 - What was changed (files + short description)
 - Verification results (what was checked, outcome)
 - Which living docs were updated, or explicitly say no living doc updates were needed
-- `DONE.md` entry added
+- `minispec/DONE.md` entry added
 - Any note if a lesson was captured
 
 ## Rules to always apply

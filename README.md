@@ -45,30 +45,32 @@ minispec follows an iterative cycle:
 /mspc-review           Health check — can add findings to TODO
 ```
 
-**Phase 1 — Bootstrap.** Run `/mspc-init` with an idea or idea file. It creates the project structure, core docs, and the first version of `docs/TODO.md` from the idea.
+**Phase 1 — Bootstrap.** Run `/mspc-init` with an idea or idea file. It creates the minispec document structure, project guidance, core docs, and the first version of `minispec/TODO.md` from the idea.
 
-**Phase 2 — Explore.** Use `/mspc-explore` anytime to explore ideas, open questions, tradeoffs, or new directions. It saves a summary to `docs/explorations/` and updates project docs when the exploration changes them. In practice, this is the main way new backlog items are added or refined after bootstrap.
+**Phase 2 — Explore.** Use `/mspc-explore` anytime to explore ideas, open questions, tradeoffs, or new directions. It saves a summary to `minispec/explorations/` and updates project docs when the exploration changes them. In practice, this is the main way new backlog items are added or refined after bootstrap.
 
-`docs/TODO.md` is the working backlog. It can grow in four ways:
+`minispec/TODO.md` is the working backlog. It can grow in four ways:
 - `/mspc-init` seeds the initial items
 - `/mspc-explore` adds tasks, questions, or exploration items when actionable work emerges
-- `/mspc-review` can promote findings into TODO
+- `/mspc-review` can promote findings into `minispec/TODO.md`
 - `/mspc-task-new <description>` can create a new task entry before writing its spec
 
-Because the backlog is file-based, you can also edit `docs/TODO.md` directly when that is simpler.
+Because the backlog is file-based, you can also edit `minispec/TODO.md` directly when that is simpler.
 
-**Phase 3 — Implement.** Once a backlog item is ready, pick its task ID from `docs/TODO.md` and run:
-1. `/mspc-task-new T0001` — writes a detailed spec in `docs/specs/`
+**Phase 3 — Implement.** Once a backlog item is ready, pick its task ID from `minispec/TODO.md` and run:
+1. `/mspc-task-new T0001` — writes a detailed spec in `minispec/specs/`
 2. `/mspc-task-impl T0001` — implements the spec, runs tests, verifies acceptance criteria
-3. `/mspc-task-accept T0001` — distills the spec into `REQS.md`, `TECH.md`, `TESTS.md`, archives the task, and removes the spec
+3. `/mspc-task-accept T0001` — distills the spec into `minispec/REQS.md`, `minispec/TECH.md`, `minispec/TESTS.md`, archives the task, and removes the spec
 
 **Phase 4 — Review.** Run `/mspc-review` periodically to audit docs, code, tests, and active specs for inconsistencies.
 
 ### Project structure created by minispec
 
+minispec owns the generated `minispec/` directory and root `AGENTS.md`. Source code, tests, and all other project files are user-owned and can use whatever layout fits the project.
+
 ```text
 AGENTS.md                   Project guidance for OpenCode
-docs/
+minispec/
   CONCEPT.md                Vision & north star (may describe future features)
   REQS.md                   Implemented requirements only
   TECH.md                   Actual technical architecture only
@@ -78,7 +80,6 @@ docs/
   LESSONS.md                Non-obvious insights: abandoned approaches, reversals, gotchas
   specs/                    Temporary per-task specifications
   explorations/             Exploration & brainstorming artifacts
-impl/                       Codebase
 ```
 
 ## Commands
@@ -92,11 +93,11 @@ Bootstrap a new project from an idea description.
 /mspc-init path/to/idea-file.md
 ```
 
-This command creates the folder structure above and seeds:
-- `CONCEPT.md` — distilled vision, motivation, core concept, key decisions, planned features, open questions
-- `TODO.md` — initial backlog organized into Development, Open Questions, and Exploration sections
-- `REQS.md`, `TESTS.md`, `DONE.md`, `LESSONS.md` — living docs shells
-- `TECH.md` — reality-only shell, populated later by `/mspc-task-accept`
+This command creates the minispec structure above and seeds:
+- `minispec/CONCEPT.md` — distilled vision, motivation, core concept, key decisions, planned features, open questions
+- `minispec/TODO.md` — initial backlog organized into Development, Open Questions, and Exploration sections
+- `minispec/REQS.md`, `minispec/TESTS.md`, `minispec/DONE.md`, `minispec/LESSONS.md` — living docs shells
+- `minispec/TECH.md` — reality-only shell, populated later by `/mspc-task-accept`
 - `AGENTS.md` — project snapshot, principles, document philosophy, workflow guidance, and structured discussion guidance for normal OpenCode conversations
 
 ### `/mspc-explore`
@@ -108,9 +109,9 @@ Explore, investigate, and brainstorm at any project phase.
 ```
 
 The session produces:
-- A summary file in `docs/explorations/<date>-<topic>.md`
-- Updates to `CONCEPT.md` if the vision changed
-- New items in `TODO.md` if actionable work emerged
+- A summary file in `minispec/explorations/<date>-<topic>.md`
+- Updates to `minispec/CONCEPT.md` if the vision changed
+- New items in `minispec/TODO.md` if actionable work emerged
 
 Outside `/mspc-explore`, the generated `AGENTS.md` still encourages structured discussions: numbered question batches, a quick reframe check, explicit assumptions and tradeoffs, and concise summaries. `/mspc-explore` remains the explicit path for durable artifacts and doc updates.
 
@@ -124,11 +125,11 @@ Bootstrap a task with a detailed specification.
 /mspc-task-new add dark mode support
 ```
 
-Takes a task ID from `TODO.md` or a new description. Routes by task type:
-- **Development task** — generates a spec at `docs/specs/SPEC-T0001.md` using zero-padded task IDs (`T0001`, `T0002`, ...)
+Takes a task ID from `minispec/TODO.md` or a new description. Routes by task type:
+- **Development task** — generates a spec at `minispec/specs/SPEC-T0001.md` using zero-padded task IDs (`T0001`, `T0002`, ...)
 - **Open question / Exploration** — routes you to `/mspc-explore`
 
-If you pass a new description instead of an existing task ID, minispec checks for duplicates, assigns the next task ID, confirms the right `TODO.md` section, and adds the item before continuing.
+If you pass a new description instead of an existing task ID, minispec checks for duplicates, assigns the next task ID, confirms the right `minispec/TODO.md` section, and adds the item before continuing.
 
 If the work is truly trivial, use `/mspc-task-quick` instead.
 
@@ -158,13 +159,13 @@ Accept a completed task and distill its spec into living docs.
 ```
 
 Run this after you have tested the implementation yourself. The command:
-1. Extracts requirements from the spec into `REQS.md`
-2. Extracts technical details into `TECH.md`
-3. Extracts test cases into `TESTS.md`
-4. Archives the task in `DONE.md`
-5. Removes the task from `TODO.md`
-6. Updates `CONCEPT.md` if implementation changed the vision
-7. Captures any durable insight in `LESSONS.md` when one actually emerged
+1. Extracts requirements from the spec into `minispec/REQS.md`
+2. Extracts technical details into `minispec/TECH.md`
+3. Extracts test cases into `minispec/TESTS.md`
+4. Archives the task in `minispec/DONE.md`
+5. Removes the task from `minispec/TODO.md`
+6. Updates `minispec/CONCEPT.md` if implementation changed the vision
+7. Captures any durable insight in `minispec/LESSONS.md` when one actually emerged
 8. Removes the spec file
 
 ### `/mspc-task-quick`
@@ -187,9 +188,9 @@ Audit the project for inconsistencies, gaps, and improvements.
 ```
 
 Reads all docs, code, tests, and active specs, then cross-references everything:
-- **Docs vs docs** — do requirements match technical components? Does `CONCEPT.md` align with `TODO.md`? Are there duplicates or contradictions?
-- **Docs vs code** — are requirements implemented? Does `TECH.md` match the actual codebase? Are there undocumented behaviors?
+- **Docs vs docs** — do requirements match technical components? Does `minispec/CONCEPT.md` align with `minispec/TODO.md`? Are there duplicates or contradictions?
+- **Docs vs code** — are requirements implemented? Does `minispec/TECH.md` match the actual codebase? Are there undocumented behaviors?
 - **Code quality** — security issues, code smells, error handling, naming drift
 - **Test coverage** — are documented behaviors tested or covered by clear manual checks? Are active-spec edge cases covered? Are manual tests current?
 
-Findings are reported by severity with flat `F<N>` identifiers. After the report, the command can promote selected findings into `TODO.md` as new tasks.
+Findings are reported by severity with flat `F<N>` identifiers. After the report, the command can promote selected findings into `minispec/TODO.md` as new tasks.

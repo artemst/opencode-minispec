@@ -17,11 +17,11 @@
 
 ## Minispec Invariants
 
-- `CONCEPT.md` may describe planned work. `REQS.md` and `TECH.md` must describe implemented reality only.
-- `docs/specs/SPEC-T####.md` is temporary: create it in `/mspc-task-new`, implement from it in `/mspc-task-impl`, distill it and delete it in `/mspc-task-accept`.
-- `LESSONS.md` stays sparse. Only durable, non-obvious lessons belong there, and `/mspc-task-accept` or `/mspc-task-quick` should confirm with the user before writing one.
+- `minispec/CONCEPT.md` may describe planned work. `minispec/REQS.md` and `minispec/TECH.md` must describe implemented reality only.
+- `minispec/specs/SPEC-T####.md` is temporary: create it in `/mspc-task-new`, implement from it in `/mspc-task-impl`, distill it and delete it in `/mspc-task-accept`.
+- `minispec/LESSONS.md` stays sparse. Only durable, non-obvious lessons belong there, and `/mspc-task-accept` or `/mspc-task-quick` should confirm with the user before writing one.
 - `/mspc-task-quick` is a hard trivial-change path. If the work needs design decisions, touches more than a tiny surface, or grows during verification, stop and route to `/mspc-task-new`.
-- `/mspc-review` is read-only except for findings the user explicitly chooses to promote into `docs/TODO.md`.
+- `/mspc-review` is read-only except for findings the user explicitly chooses to promote into `minispec/TODO.md`.
 
 ## Verification
 
@@ -31,3 +31,12 @@
 - Run `npm run pack:dry-run` when the published surface changes: `package.json`, `index.js`, `commands/*`, or `README*`.
 - Run `git diff --check` before finishing.
 - After editing prompts or docs, re-read the changed Markdown for stale slash commands, zero-padded task/spec IDs (`T0001`, `SPEC-T0001`), and workflow drift between prompts and READMEs.
+
+## Interaction Rules
+
+- **Think before writing.** Surface assumptions and tradeoffs explicitly. Ask clarifying questions before starting implementation.
+- When user input is needed, prefer the `question` tool when it fits; otherwise ask a numbered list with one question per item.
+- In deeper discussions, ask one batch at a time, usually no more than 3-5 questions before waiting for answers.
+- Surface assumptions, constraints, and tradeoffs explicitly instead of silently choosing a path.
+- At natural pauses, summarize what is understood, what remains open, and what recommendation follows.
+- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.

@@ -5,7 +5,7 @@ agent: build
 
 # Minispec Init
 
-You are bootstrapping a new project workspace from an initial idea description. The goal is to create a clean, minimal project structure with a distilled vision document (`CONCEPT.md`), an initial backlog (`TODO.md`), and project guidance (`AGENTS.md`).
+You are bootstrapping a new project workspace from an initial idea description. The goal is to create a clean, minimal project structure with a distilled vision document (`minispec/CONCEPT.md`), an initial backlog (`minispec/TODO.md`), and project guidance (`AGENTS.md`).
 
 ## Interaction rules
 
@@ -31,18 +31,17 @@ Extract everything explicitly stated from the idea (file or inline description).
 
 ---
 
-## Step 2 — Create folder structure
+## Step 2 — Create minispec folder structure
 
 ```text
-docs/
-docs/specs/
-docs/explorations/
-impl/
+minispec/
+minispec/specs/
+minispec/explorations/
 ```
 
 ---
 
-## Step 3 — Create `docs/CONCEPT.md`
+## Step 3 — Create `minispec/CONCEPT.md`
 
 This is the project's north star — a permanent vision memo. It can describe things that are not built yet. It captures the full picture of what the project is about and key decisions made.
 
@@ -104,7 +103,7 @@ _Features planned for the project. This is the vision — implementation tracks 
 
 ---
 
-## Step 4 — Create `docs/TODO.md`
+## Step 4 — Create `minispec/TODO.md`
 
 Extract actionable items from the idea description and organize them into the backlog. Assign task IDs starting from `T0001`.
 
@@ -139,7 +138,7 @@ created: "<YYYY-MM-DD>"
 
 ## Step 5 — Create remaining docs
 
-**`docs/REQS.md`**
+**`minispec/REQS.md`**
 
 This doc tracks implemented system requirements. It starts nearly empty and is populated incrementally through `/mspc-task-accept`.
 
@@ -168,7 +167,7 @@ _Populated as tasks are accepted._
 ## Glossary
 ```
 
-**`docs/TECH.md`**
+**`minispec/TECH.md`**
 
 This doc tracks actual technical details of what is built. It starts as a reality-only shell and is populated incrementally through `/mspc-task-accept`.
 
@@ -208,7 +207,7 @@ _Populated as data structures are implemented._
 _Populated as technical decisions are implemented._
 ```
 
-**`docs/TESTS.md`**
+**`minispec/TESTS.md`**
 
 ```markdown
 ---
@@ -230,7 +229,7 @@ _Test cases that are covered by automated tests._
 _Test cases that require manual verification._
 ```
 
-**`docs/DONE.md`**
+**`minispec/DONE.md`**
 
 ```markdown
 ---
@@ -243,7 +242,7 @@ created: "<YYYY-MM-DD>"
 _Tasks moved here from TODO.md after acceptance via `/mspc-task-accept`._
 ```
 
-**`docs/LESSONS.md`**
+**`minispec/LESSONS.md`**
 
 ```markdown
 ---
@@ -300,21 +299,21 @@ This file provides guidance to OpenCode when working with code in this repositor
 - Surface assumptions, constraints, and tradeoffs explicitly instead of silently choosing a path.
 - At natural pauses, summarize what is understood, what remains open, and what recommendation follows.
 - Normal discussion is conversational by default. Do not create docs or backlog items from ordinary chat unless the user asks, or the interaction is explicitly promoted to `/mspc-explore`.
-- If a conversation produces durable decisions, clarified vision, or actionable backlog items, suggest `/mspc-explore` so the outcome is captured in `docs/explorations/` and linked back into project docs.
+- If a conversation produces durable decisions, clarified vision, or actionable backlog items, suggest `/mspc-explore` so the outcome is captured in `minispec/explorations/` and linked back into project docs.
 
 ## Context files
 
 Read these before working on any task:
 
-- `docs/CONCEPT.md` — project vision, motivation, planned features
-- `docs/REQS.md` — system requirements tracking what is implemented
-- `docs/TECH.md` — technical details tracking what is built
-- `docs/TODO.md` — backlog: development tasks, open questions, exploration items
-- `docs/DONE.md` — completed tasks archive
-- `docs/TESTS.md` — regression test cases
-- `docs/LESSONS.md` — non-obvious insights, reversed decisions, gotchas
-- `docs/specs/` — active per-task implementation specs
-- `docs/explorations/` — exploration session summaries and brainstorming artifacts
+- `minispec/CONCEPT.md` — project vision, motivation, planned features
+- `minispec/REQS.md` — system requirements tracking what is implemented
+- `minispec/TECH.md` — technical details tracking what is built
+- `minispec/TODO.md` — backlog: development tasks, open questions, exploration items
+- `minispec/DONE.md` — completed tasks archive
+- `minispec/TESTS.md` — regression test cases
+- `minispec/LESSONS.md` — non-obvious insights, reversed decisions, gotchas
+- `minispec/specs/` — active per-task implementation specs
+- `minispec/explorations/` — exploration session summaries and brainstorming artifacts
 
 ## Document philosophy
 
@@ -358,25 +357,25 @@ Begin a light clarification round. The goal is not a full product deep-dive — 
 Before asking anything, analyze the idea and determine what is genuinely ambiguous or missing. Focus on:
 - Contradictions within the idea description
 - Statements too vague to classify as core vs future feature
-- Core concept unclear enough that `CONCEPT.md` sections cannot be populated accurately
+- Core concept unclear enough that `minispec/CONCEPT.md` sections cannot be populated accurately
 - Platform, language, or domain that is unstated but assumed
 
 Do not explore scope boundaries, edge cases, competitive positioning, or product strategy — those are `/mspc-explore` territory.
 
 Ask all clarification questions in one message. Prefer the `question` tool when it fits; otherwise use a numbered list so each question is easy to reference. If there are no genuine ambiguities, skip this step entirely and say so.
 
-After the user answers, immediately update `docs/CONCEPT.md` and other affected docs on disk. When a question is resolved, remove it from `## Open Questions`.
+After the user answers, immediately update `minispec/CONCEPT.md` and other affected docs on disk. When a question is resolved, remove it from `## Open Questions`.
 
 ---
 
 ## Step 8 — Seed initial content
 
 After clarification, do a focused pass:
-1. `CONCEPT.md` — ensure all sections are populated with known information. Keep speculative implementation detail out.
-2. `TODO.md` — ensure all actionable items are captured with appropriate categories.
-3. `TECH.md` — leave it as a reality-only shell. Do not copy planned stack or architecture from the idea.
+1. `minispec/CONCEPT.md` — ensure all sections are populated with known information. Keep speculative implementation detail out.
+2. `minispec/TODO.md` — ensure all actionable items are captured with appropriate categories.
+3. `minispec/TECH.md` — leave it as a reality-only shell. Do not copy planned stack or architecture from the idea.
 4. `AGENTS.md` — update Project snapshot if Q&A refined the understanding.
-5. `impl/` — if project structure is clear from the idea, create it. Otherwise leave it flat.
+5. Do not create or require a fixed code directory. Outside `minispec/` and generated root `AGENTS.md`, the project layout is owned by the user and future implementation tasks.
 
 ---
 
@@ -385,13 +384,13 @@ After clarification, do a focused pass:
 Output:
 - What was extracted from the idea description and where it was placed
 - What was clarified during Q&A (if any)
-- Remaining open questions (ensure they are in `docs/CONCEPT.md`)
+- Remaining open questions (ensure they are in `minispec/CONCEPT.md`)
 - Suggested next step — typically "Run `/mspc-explore` to dive deeper into specific aspects, or `/mspc-task-new T0001` to start working on the first task"
 
 Before outputting the summary, verify all docs are consistent:
 - `AGENTS.md`: Project snapshot has real content
-- `docs/CONCEPT.md`: populated from idea, no speculative implementation details
-- `docs/TECH.md`: no speculative implementation details
-- `docs/TODO.md`: actionable items organized by category
-- `docs/REQS.md`: nearly empty (no implementation yet)
-- `docs/LESSONS.md`: seeded empty with usage guidance
+- `minispec/CONCEPT.md`: populated from idea, no speculative implementation details
+- `minispec/TECH.md`: no speculative implementation details
+- `minispec/TODO.md`: actionable items organized by category
+- `minispec/REQS.md`: nearly empty (no implementation yet)
+- `minispec/LESSONS.md`: seeded empty with usage guidance
