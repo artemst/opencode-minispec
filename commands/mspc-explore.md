@@ -20,7 +20,7 @@ When assigning new task IDs for TODO items, scan all existing task-bearing artif
 - `minispec/TODO.md`
 - `minispec/DONE.md`
 - active spec filenames and contents in `minispec/specs/`
-- exploration summaries in `minispec/explorations/`
+- exploration summaries and sync reports in `minispec/explorations/`
 
 Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
 
@@ -34,7 +34,7 @@ Assign one greater than the highest real `T####` found. If no real task IDs exis
 4. Read `minispec/DONE.md` for completed task context and task ID allocation.
 5. Read `minispec/REQS.md` and `minispec/TECH.md` to understand what is already implemented.
 6. If `$ARGUMENTS` references a specific task ID, read that task's details.
-7. Scan `minispec/specs/` and `minispec/explorations/` for prior sessions and existing task IDs.
+7. Scan `minispec/specs/` and `minispec/explorations/` for prior explorations, sync reports, and existing task IDs.
 
 ### Phase 2 — Frame the Exploration
 

@@ -20,7 +20,7 @@ When assigning a new task ID, scan all existing task-bearing artifacts before ch
 - `minispec/TODO.md`
 - `minispec/DONE.md`
 - active spec filenames and contents in `minispec/specs/`
-- exploration summaries in `minispec/explorations/`
+- exploration summaries and sync reports in `minispec/explorations/`
 
 Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
 

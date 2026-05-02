@@ -21,3 +21,5 @@ npm-debug.log*
 
 # Backup files
 *.bak
+
+PUBLISH.md
