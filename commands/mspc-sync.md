@@ -53,7 +53,7 @@ Minispec docs:
 7. `minispec/DONE.md`
 8. `minispec/LESSONS.md` if present
 9. Active specs in `minispec/specs/`
-10. Prior summaries in `minispec/explorations/`
+10. Prior summaries in `minispec/summaries/`
 
 Project artifacts outside `minispec/`:
 - README files and docs directories
@@ -145,7 +145,7 @@ When assigning new task IDs, scan all existing task-bearing artifacts first:
 - `minispec/TODO.md`
 - `minispec/DONE.md`
 - active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/explorations/`
+- exploration summaries and sync reports in `minispec/summaries/`
 
 Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved to `DONE.md`.
 
@@ -153,7 +153,7 @@ Do not flood TODO with every minor observation. Prefer concise, actionable entri
 
 ### Phase 5 - Write Sync Report
 
-Create a report in `minispec/explorations/<YYYY-MM-DD>-sync.md` or, if `$ARGUMENTS` gives a useful focus, `minispec/explorations/<YYYY-MM-DD>-sync-<topic-slug>.md`.
+Create a report in `minispec/summaries/<YYYY-MM-DD>-sync.md` or, if `$ARGUMENTS` gives a useful focus, `minispec/summaries/<YYYY-MM-DD>-sync-<topic-slug>.md`.
 
 If a same-day report with the same name exists, update it rather than creating duplicates unless the new sync is clearly separate.
 

@@ -12,7 +12,7 @@ You are conducting a structured exploration session. This can happen at any phas
 When user input is needed, prefer the `question` tool when it fits; otherwise ask a numbered list with one question per item.
 
 The session produces:
-1. A summary file in `minispec/explorations/`
+1. A summary file in `minispec/summaries/`
 2. Updates to `minispec/CONCEPT.md` if the vision changed
 3. New items in `minispec/TODO.md` if actionable work emerged
 
@@ -20,7 +20,7 @@ When assigning new task IDs for TODO items, scan all existing task-bearing artif
 - `minispec/TODO.md`
 - `minispec/DONE.md`
 - active spec filenames and contents in `minispec/specs/`
-- exploration summaries and sync reports in `minispec/explorations/`
+- exploration summaries and sync reports in `minispec/summaries/`
 
 Assign one greater than the highest real `T####` found. If no real task IDs exist, start at `T0001`. Do not reuse IDs after tasks have moved from `minispec/TODO.md` to `minispec/DONE.md`.
 
@@ -34,7 +34,7 @@ Assign one greater than the highest real `T####` found. If no real task IDs exis
 4. Read `minispec/DONE.md` for completed task context and task ID allocation.
 5. Read `minispec/REQS.md` and `minispec/TECH.md` to understand what is already implemented.
 6. If `$ARGUMENTS` references a specific task ID, read that task's details.
-7. Scan `minispec/specs/` and `minispec/explorations/` for prior explorations, sync reports, and existing task IDs.
+7. Scan `minispec/specs/` and `minispec/summaries/` for prior explorations, sync reports, and existing task IDs.
 
 ### Phase 2 — Frame the Exploration
 
@@ -76,7 +76,7 @@ Rules:
 
 When the exploration reaches a natural conclusion (or the user signals they are done):
 
-1. Create an exploration summary at `minispec/explorations/<YYYY-MM-DD>-<topic-slug>.md`.
+1. Create an exploration summary at `minispec/summaries/<YYYY-MM-DD>-<topic-slug>.md`.
 2. Update `minispec/CONCEPT.md` if the vision, planned features, or key decisions changed.
 3. Update `minispec/TODO.md` with new tasks, questions, or exploration items that emerged. Assign any new task IDs using the global task ID rule above.
 4. Do not update `minispec/TECH.md` from exploration alone — `minispec/TECH.md` tracks implemented reality.

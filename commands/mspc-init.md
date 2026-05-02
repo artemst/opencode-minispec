@@ -51,7 +51,7 @@ Create only missing directories:
 ```text
 minispec/
 minispec/specs/
-minispec/explorations/
+minispec/summaries/
 ```
 
 Never delete or replace existing directories.
@@ -350,7 +350,7 @@ This file provides guidance to OpenCode when working with code in this repositor
 - Surface assumptions, constraints, and tradeoffs explicitly instead of silently choosing a path.
 - At natural pauses, summarize what is understood, what remains open, and what recommendation follows.
 - Normal discussion is conversational by default. Do not create docs or backlog items from ordinary chat unless the user asks, or the interaction is explicitly promoted to `/mspc-explore`.
-- If a conversation produces durable decisions, clarified vision, or actionable backlog items, suggest `/mspc-explore` so the outcome is captured in `minispec/explorations/` and linked back into project docs.
+- If a conversation produces durable decisions, clarified vision, or actionable backlog items, suggest `/mspc-explore` so the outcome is captured in `minispec/summaries/` and linked back into project docs.
 
 ### Context files
 
@@ -364,7 +364,7 @@ Read these before working on any minispec task:
 - `minispec/TESTS.md` - regression test cases
 - `minispec/LESSONS.md` - non-obvious insights, reversed decisions, gotchas
 - `minispec/specs/` - active per-task implementation specs
-- `minispec/explorations/` - exploration and sync summaries
+- `minispec/summaries/` - exploration and sync summaries
 
 ### Document philosophy
 
@@ -393,7 +393,7 @@ Health review:   /mspc-review (finds bugs, risks, missing tests, and actionable 
 |---------|---------|
 | `/mspc-init` | Safely add minispec structure and workflow guidance |
 | `/mspc-sync` | Reconcile minispec docs with current code, tests, configs, and docs |
-| `/mspc-explore` | Explore project questions, save to explorations, update docs if needed |
+| `/mspc-explore` | Explore project questions, save to summaries, update docs if needed |
 | `/mspc-task-new T0001` | Create a spec for a development task, or route open questions/exploration to `/mspc-explore` |
 | `/mspc-task-impl T0001` | Implement from spec, verify acceptance criteria |
 | `/mspc-task-accept T0001` | Distill spec into REQS/TECH/TESTS, archive task, delete spec |

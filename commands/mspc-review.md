@@ -26,7 +26,7 @@ Read enough project context to review accurately:
 7. Read `minispec/TESTS.md`.
 8. Read `minispec/LESSONS.md` if present.
 9. Read all active specs in `minispec/specs/`.
-10. Read recent exploration and sync summaries in `minispec/explorations/` when relevant.
+10. Read recent exploration and sync summaries in `minispec/summaries/` when relevant.
 11. Read project code outside `minispec/`, identifying source locations from the actual layout.
 12. Identify and read test files from the actual layout.
 13. Read build, lint, package, and CI configs if present.
@@ -103,7 +103,7 @@ After the report, offer to add selected findings to `minispec/TODO.md` as new ta
 Before writing, for each selected finding:
 - Check whether a matching task already exists in `minispec/TODO.md`.
 - Decide the TODO category.
-- Assign the next task ID by scanning `minispec/TODO.md`, `minispec/DONE.md`, active spec filenames and contents in `minispec/specs/`, and exploration summaries plus sync reports in `minispec/explorations/`; use one greater than the highest real `T####` found.
+- Assign the next task ID by scanning `minispec/TODO.md`, `minispec/DONE.md`, active spec filenames and contents in `minispec/specs/`, and exploration summaries plus sync reports in `minispec/summaries/`; use one greater than the highest real `T####` found.
 
 Write additions to `minispec/TODO.md` under the appropriate section:
 
