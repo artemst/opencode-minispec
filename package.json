@@ -1,6 +1,6 @@
 {
   "name": "opencode-minispec",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Document-driven software development workflow commands for OpenCode",
   "type": "module",
   "main": "./index.js",
